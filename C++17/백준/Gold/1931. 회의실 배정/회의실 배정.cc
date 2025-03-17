@@ -4,13 +4,6 @@
 #include <algorithm>
 using namespace std;
 
-bool cmp(pair<int, int> a, pair<int, int> b){
-    if(a.first != b.first)
-        return a.first < b.first;
-    else
-        return a.second < b.second;
-}
-
 int main(){
     ios::sync_with_stdio(0); cin.tie(0);
 
