@@ -17,6 +17,7 @@ void dijkstra(int startV){
         int cW = pq.top().first;
         int cV = pq.top().second;
         pq.pop();
+        if(processed[cV]) continue;
         processed[cV] = true;
 
         for(auto neighbor : adj[cV]){
