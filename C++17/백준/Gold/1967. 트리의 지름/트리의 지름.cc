@@ -6,7 +6,6 @@ using namespace std;
 
 int diameter, next_start;
 vector<vector<pair<int, int>>> adj;
-vector<int> dis;
 vector<bool> used;
 
 void DFS(int start, int dis){
@@ -33,8 +32,7 @@ int main(){
 
     int n; cin >> n;
     adj.resize(n+1);
-    dis.resize(n+1, 0);
-    used.resize(n+1, false);
+    used.resize(n+1);
     
     for(int i=1; i<n; i++){
         int u, v, w; cin >> u >> v >> w;
@@ -42,17 +40,10 @@ int main(){
         adj[v].push_back({u, w});
     }
 
-    next_start = 1;
-    while(true){
-        dis.clear();
-        used.clear();
-        dis.resize(n+1, 0);
-        used.resize(n+1, false);
-
-        int temp = diameter;
-        DFS(next_start, 0);
-        if(temp==diameter) break;
-    }
+    DFS(1, 0);
+    fill(used.begin(), used.end(), false);
+    DFS(next_start, 0);
+    
     cout << diameter;
     return 0;
 }
