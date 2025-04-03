@@ -6,17 +6,15 @@
 using namespace std;
 
 int solution(vector<vector<int>> jobs) { // {요청 시간, 소요 시간}
-    int answer = 0, maxIdx = jobs.size();
-    map<int, 
-        priority_queue<
-            pair<int, int>, 
-            vector<pair<int, int>>, 
-            greater<pair<int, int>>
-            >
-        > eventQueue;    
-    
-    int currentTime = 0, idx = 0, processedJob = 0;
     sort(jobs.begin(), jobs.end());
+    map<int, priority_queue<
+                pair<int, int>, 
+                vector<pair<int, int>>, 
+                greater<pair<int, int>>
+             >
+       > eventQueue;    
+    int currentTime = 0, idx = 0, processedJob = 0;
+    int answer = 0, maxIdx = jobs.size();
     while(processedJob < maxIdx){
         while(idx<maxIdx && jobs[idx][0]<=currentTime){
             eventQueue[jobs[idx][1]].push({jobs[idx][0], idx});
