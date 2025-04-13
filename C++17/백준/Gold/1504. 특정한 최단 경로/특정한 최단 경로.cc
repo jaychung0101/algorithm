@@ -22,12 +22,6 @@ pair<int, int> dijkstra(int u1, int u2){
         int cV = pq.top().second; pq.pop();
         
         if(used[cV]) continue;
-        
-        if(cV==1) answer.first = dist[1];
-        else if(cV==N) answer.second = dist[N];
-        
-        if(cV==u2) interDis = dist[u2];
-
         used[cV] = true;
 
         for(auto n : adj[cV]){
@@ -40,6 +34,9 @@ pair<int, int> dijkstra(int u1, int u2){
             }
         }
     }
+
+    answer = {dist[1], dist[N]};
+    interDis = dist[u2];
 
     if(dist[1] == INT32_MAX || dist[N]==INT32_MAX || dist[u1]==INT32_MAX || dist[u2]==INT32_MAX) flag = false;
     
