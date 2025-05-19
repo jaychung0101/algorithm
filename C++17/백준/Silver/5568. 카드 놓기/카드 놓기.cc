@@ -11,23 +11,17 @@ vector<string> answer;
 vector<bool> used;
 unordered_set<string> s;
 
-void backtracking(int size){
-    if(answer.size()==k){
-        string temp = "";
-        for(string x : answer){
-            temp += x;
-        }
-
-        s.insert(temp);
+void backtracking(int size, string answer){
+    if(size==k){
+        s.insert(answer);
+        return;
     }
 
     for(int i=0; i<n; i++){
         if(used[i]) continue;
         
         used[i] = true;
-        answer.push_back(v[i]);
-        backtracking(size+1);
-        answer.pop_back();
+        backtracking(size+1, answer+v[i]);
         used[i] = false;
     }
 }
@@ -43,7 +37,7 @@ int main(){
         cin >> x;
     }
 
-    backtracking(0);
+    backtracking(0, "");
 
     cout << s.size();
 
