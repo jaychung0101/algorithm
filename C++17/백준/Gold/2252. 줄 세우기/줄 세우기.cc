@@ -1,6 +1,7 @@
 //줄 세우기
 #include <iostream>
 #include <vector>
+#include <queue>
 using namespace std;
 
 int main(){
@@ -10,27 +11,27 @@ int main(){
     int N, M; cin >> N >> M;
     vector<vector<int>> v(N+1, vector<int>());
     vector<int> parent(N+1, 0);
-    vector<bool> used(N+1, false);
-
+    queue<int> q;
+    
     while(M--){
         int x, y; cin >> x >> y;
         v[x].push_back(y);
         parent[y]++;
     }
 
-    int count = 0;
-    while(count<N){
-        for(int i=1; i<N+1; i++){
-            if(used[i]) continue;
+    for(int i=1; i<N+1; i++){
+        if(parent[i]) continue;
 
-            if(parent[i]==0){
-                cout << i << ' ';
-                used[i] = true;
-                for(int nei : v[i]){
-                    parent[nei]--;
-                }
-                count++;
-            }
+        q.push(i);
+    }
+
+    while(!q.empty()){
+        int x = q.front(); q.pop();
+        cout << x << ' ';
+
+        for(int nei : v[x]){
+            parent[nei]--;
+            if(parent[nei]==0) q.push(nei);
         }
     }
 
