@@ -1,27 +1,20 @@
 #include <string>
 #include <vector>
+#include <deque>
 
 using namespace std;
 
 string solution(string number, int k) {
-    string answer = "";
+    deque<char> d;
     
-    int num = number.length() - k;
-    int idx = 0;
-    
-    for(int i=0; i<num; i++){
-        char maxChar = number[idx];
-        int maxIdx = idx;
-
-        for(int j = idx; j <= k+i; j++){
-            if(maxChar < number[j]){
-                maxChar = number[j];
-                maxIdx = j;
-            }
+    for(char c : number){
+        while(d.size() && k && d.back()<c){
+            d.pop_back();
+            k--;
         }
-        answer += maxChar;
-        idx = maxIdx + 1;
+        d.push_back(c);
     }
     
+    string answer(d.begin(), d.end()-k);
     return answer;
 }
